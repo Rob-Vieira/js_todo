@@ -1,0 +1,122 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body {
+  background: #1b1b1b;
+  color: #f0f0f0;
+  font-family: sans-serif;
+}
+
+.header {
+  border: 2px solid #41e049;
+  max-width: 600px;
+  width: 100%;
+  margin: 30px auto 0px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.header::after {
+  content: "";
+  width: 30px;
+  height: 30px;
+  border-bottom: 2px solid #41e049;
+  background: #1b1b1b;
+  position: absolute;
+  top: -17px;
+  right: -16px;
+  transform: rotateZ(45deg);
+}
+.header span{
+  font-size: 24px;
+  font-weight: bolder;
+  text-transform: uppercase;
+}
+
+.board {
+  border: 2px solid #41e049;
+  max-width: 600px;
+  width: 100%;
+  margin: 20px auto 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 350px;
+}
+
+#input_task {
+  display: flex;
+  gap: 20px;
+  position: sticky;
+  top: 0px;
+  background: #2e2e2e;
+  padding: 15px;
+}
+#input_task input {
+  padding: 15px;
+  flex: 3;
+}
+#input_task button {
+  padding: 15px;
+  flex: 1;
+  background: #41e049;
+  border: 2px solid #41e049;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+#list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+#list .task {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2e2e2e;
+  padding: 15px;
+  transition: 0.1s ease-in-out;
+}
+#list .task .buttons button {
+  padding: 15px;
+  background: #41e049;
+  border: 2px solid #41e049;
+}
+#list .task span {
+  font-size: 18px;
+  font-weight: bold;
+}
+#list .task.check {
+  border-left: 4px solid #41e049;
+}
+#list .task.check span {
+  text-decoration: line-through;
+  color: #41e049;
+}
