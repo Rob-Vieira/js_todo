@@ -6,7 +6,12 @@ var tasks_count = 0;
 
 function add_task() {
   let title = INPUT_TASK.querySelector("input").value;
+  
+  if(title === "") return false;
+  
   LIST.appendChild(create_task(title));
+  toggleList();
+  INPUT_TASK.querySelector("input").value = "";
 }
 
 function create_task(title) {
@@ -20,8 +25,8 @@ function create_task(title) {
   div.innerHTML = `
     <span>${title}</span>
     <div class="buttons">
-      <button>V</button>
-      <button>X</button>
+      <button><i class="fa-solid fa-check"></i></button>
+      <button><i class="fa-solid fa-xmark"></i></button>
     </div>
   `;
 
@@ -32,12 +37,21 @@ function create_task(title) {
   };
   buttons[1].onclick = () => {
     div.parentNode.removeChild(div);
+    toggleList();
   };
 
   return div;
 }
 
-var date = new Date(Date.now())
+function toggleList() {
+  if (LIST.childElementCount <= 0) {
+    LIST.setAttribute("style", "display:none;");
+  } else {
+    LIST.setAttribute("style", "");
+  }
+}
 
-DATE.innerText = date.toLocaleDateString()
+var date = new Date(Date.now());
+
+DATE.innerText = date.toLocaleDateString();
 INPUT_TASK.querySelector("button").onclick = add_task;
