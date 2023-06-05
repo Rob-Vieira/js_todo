@@ -40,7 +40,6 @@ const createTask = (task, index) => {
   tasks_count++;
 
   div.setAttribute("class", "task");
-  div.setAttribute("draggable", "true");
 
   div.innerHTML = `
     <span>${task.title}</span>
@@ -77,10 +76,6 @@ const moveArrayElement = (arr, from, to) => {
   arr.splice(from, 1);
   arr.splice(to, 0, el);
 };
-
-list.addEventListener("dragover", (e) => {
- console.log(e.clientY);
-})
 
 today.innerText = new Date(Date.now()).toLocaleDateString();
 inputTask.querySelector("button").onclick = addTask;
