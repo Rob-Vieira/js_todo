@@ -4,14 +4,15 @@ const today = document.getElementById("date");
 
 const tasks = [
   {
-    title: "teste de task",
+    title: "Task 01",
   },
   {
-    title: "teste de task 2",
+    title: "Task 02",
   },
 ];
 
 var tasks_count = 0;
+var firstLoad = true;
 
 const updateBoard = () => {
   let htmlList = tasks.map((e, i) => createTask(e, i));
@@ -31,6 +32,42 @@ function addTask() {
 
   updateBoard(tasks);
   toggleList();
+
+  if(tasks.length > 1){
+    
+    if(firstLoad){
+      load({
+        selector: "task",
+        cloneFlag: "task-clone",
+        drop: (element, under, dir) => {
+          let canMove = true;
+          let list = Array.from(element.parentNode.children);
+          
+          let clone = list.indexOf(document.querySelector(".task-clone"));
+          list.splice(clone, 1);
+          
+          let from = list.indexOf(element);
+          let to = list.indexOf(under);
+
+          if(dir == -1 && from + 1 == to) canMove = false;
+          if(dir == 1){
+            if(to < list.length) to++;
+            from--;
+          }
+
+          
+
+          console.log(from, to, dir, canMove)
+
+          if(canMove) moveArrayElement(tasks, from, to);
+        }
+      })
+    }else{
+      loadElements("task");
+    }
+
+  }
+
   inputTask.querySelector("input").value = "";
 }
 
@@ -65,9 +102,9 @@ const createTask = (task, index) => {
 
 const toggleList = () => {
   if (list.childElementCount <= 0) {
-    list.setAttribute("style", "display:none;");
+    list.parentNode.setAttribute("style", "display:none;");
   } else {
-    list.setAttribute("style", "");
+    list.parentNode.setAttribute("style", "");
   }
 };
 

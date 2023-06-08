@@ -130,7 +130,13 @@ body {
 #input_task button i {
   font-size: 18px;
 }
-
+.list-container {
+  height: 100vh;
+  max-height: calc(100vh - 260px);
+  overflow: auto;
+  overflow-x: hidden;
+  padding: 0 15px 0 0;
+}
 #list {
   display: flex;
   flex-direction: column;
@@ -143,7 +149,18 @@ body {
   align-items: center;
   background: #2e2e2e;
   padding: 15px;
-  transition: 0.1s ease-in-out;
+  transition: transform 0.1s ease-in-out;
+}
+#list .task.dragging {
+  max-width: 600px;
+  user-select: none;
+  transform: scale(1.1) rotateZ(-5deg);
+}
+#list .task-clone {
+  width: 100%;
+  height: 80px;
+  min-height: 80px;
+  background: #242424;
 }
 #list .task .buttons {
   flex: 1;
