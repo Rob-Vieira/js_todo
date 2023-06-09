@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>ToDo - 1.0</title>
+    <title>ToDo - 2.1</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css">
@@ -15,12 +15,30 @@
         <span>Tarefas</span>
         <span id="date"></span>
     </div>
-    <div class="board">
+    <div class="tasks">
         <div id="input_task">
             <input type="text">
             <button><i class="fa-solid fa-plus"></i> Adicionar</button>
         </div>
         <div id="list" style="display: none;"></div>
+        <div id="details" class="d-none">
+          <div class="back">
+            <button>
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <div class="title">
+            <i class="fa-solid fa-hashtag"></i>
+            <textarea name="title">Título da task</textarea>
+          </div>
+          <div class="description">
+            <div class="label">
+              <i class="fa-regular fa-message"></i>
+              <span>Descrição</span>
+            </div>
+            <textarea name="description">Descrição de teste</textarea>
+          </div>
+        </div>
     </div>
 
     <script src="main.js"></script>
