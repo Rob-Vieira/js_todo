@@ -15,7 +15,7 @@ else{
   let task_storage = config.tasks;
 
   task_storage.forEach(e => {
-    add_task(e.title, e.check)
+    add_task(e.title, e.check, e.description)
   });
 
   toggleList();
@@ -108,10 +108,11 @@ function toggle_spellcheck(element) {
 /**
  * @param {String} title 
  */
-function add_task(title, check) {
+function add_task(title, check, description) {
   let task = create_task({
     title,
-    check
+    check,
+    description
   });
 
   tasks.push(task);
@@ -123,7 +124,7 @@ function add_task_by_input(){
 
   if (title === "") title = `Task ${tasks.length}`;
 
-  add_task(title, false);
+  add_task(title, false, "Adicione uma descrição mais detalhada...");
 
   save();
 
@@ -136,9 +137,9 @@ function add_task_by_input(){
  * @param {String} param0
  * @returns {Object}
  */
-function create_task({ title, check }) {
+function create_task({ title, check, description }) {
   let element = document.createElement("div");
-  let description = "Adicione uma descrição mais detalhada..."
+  // let description = "Adicione uma descrição mais detalhada..."
 
   element.setAttribute("class", "task" + (check ? " check" : ""));
 
