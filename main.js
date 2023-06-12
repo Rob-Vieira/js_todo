@@ -123,7 +123,7 @@ function add_task_by_input(){
 
   if (title === "") title = `Task ${tasks.length}`;
 
-  add_task(title);
+  add_task(title, false);
 
   save();
 
@@ -181,7 +181,18 @@ function create_task({ title, check }) {
     toggleOrder();
   };
   element.querySelector("span").onclick = () => {
-    element.classList.toggle("check")
+    let index = getTaskIndex(element);
+
+    if(tasks[index].check){
+      element.classList.remove("check")
+      tasks[index].check = false;
+    }
+    else{
+      element.classList.add("check")
+      tasks[index].check = true;
+    }
+
+    save();
   }
 
   return { title, element, description, check };
