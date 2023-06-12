@@ -4,7 +4,23 @@ const DETAILS = document.getElementById("details");
 const DATE = document.getElementById("date");
 const TITLE_PAGE = document.querySelector(".header span");
 
-const tasks = [];
+var tasks = [];
+var config = { tasks }
+
+if(localStorage.getItem("config") == null){
+  localStorage.setItem("config", JSON.stringify(config));  
+}
+else{
+  config = JSON.parse(localStorage.getItem("config"));
+  let task_storage = config.tasks;
+
+  task_storage.forEach(e => {
+    add_task(e.title)
+  });
+
+  toggleList();
+}
+
 
 var date = new Date(Date.now());
 var details_textareas = DETAILS.querySelectorAll("textarea");
@@ -31,10 +47,15 @@ var current_task = 0;
 var order = false;
 
 DATE.innerText = date.toLocaleDateString();
-INPUT_TASK.querySelector("button").onclick = add_task;
+INPUT_TASK.querySelector("button").onclick = add_task_by_input;
 DETAILS.querySelector("button").onclick = close_details;
 
 // FUNCTIONS ---------------------------------------------
+function save(){
+  config.tasks = tasks;
+  localStorage.setItem("config", JSON.stringify(config));
+}
+
 /**
  * @param {Element} element 
  */
@@ -70,6 +91,8 @@ function getAndSaveDetails() {
   ).value;
   
   tasks[current_task].element.querySelector("span").innerText = tasks[current_task].title;
+
+  save();
 }
 
 /**
@@ -82,17 +105,26 @@ function toggle_spellcheck(element) {
   element.setAttribute("spellcheck", spell == "false" ? "true" : "false");
 }
 
-function add_task() {
-  let title = INPUT_TASK.querySelector("input").value;
-
-  if (title === "") title = `Task ${tasks.length}`;
-
+/**
+ * @param {String} title 
+ */
+function add_task(title) {
   let task = create_task({
     title,
   });
 
   tasks.push(task);
   LIST.appendChild(task.element);
+}
+
+function add_task_by_input(){
+  let title = INPUT_TASK.querySelector("input").value;
+
+  if (title === "") title = `Task ${tasks.length}`;
+
+  add_task(title);
+
+  save();
 
   toggleList();
 
@@ -177,6 +209,7 @@ function deleteTask(element) {
   element.parentNode.removeChild(element);
   tasks.splice(index, 1);
   toggleList();
+  save()
 }
 
 /**
@@ -213,6 +246,7 @@ function moveTask(element, direction) {
   window.scroll(0, window.pageYOffset + scroll);
   neighboor.insertAdjacentElement(position, element);
   moveArrayElement(tasks, from, to);
+  save();
 }
 
 /**
