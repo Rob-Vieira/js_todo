@@ -140,7 +140,7 @@ function create_task({ title, check }) {
   let element = document.createElement("div");
   let description = "Adicione uma descrição mais detalhada..."
 
-  element.setAttribute("class", "task" + check ? " check" : "");
+  element.setAttribute("class", "task" + (check ? " check" : ""));
 
   element.innerHTML = `
     <span>${title}</span>
